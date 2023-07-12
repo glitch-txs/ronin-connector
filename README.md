@@ -32,5 +32,5 @@ const connector = new RoninConnector({
 
 ### Features
 - Connect to Ronin Browser Wallet.
-- If the wallet browser extension is not install it will fallback to generate an URI to create a QRCode for the mobile wallet app.
-- Connect on mobile.
+- If the wallet browser extension is not installed it will generate an URI for creating a QRCode for the mobile wallet app to scan.
+- Connect to mobile wallet app.
