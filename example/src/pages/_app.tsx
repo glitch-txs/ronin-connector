@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { createConfig, configureChains } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
 import { WagmiConfig } from 'wagmi'
-import { RoninConnector, ronin } from 'ronin-connector'
+import { RoninConnector, ronin, saigon } from 'ronin-connector'
 import { metadata } from '@/utils/metadata'
 
 const { publicClient } = configureChains([ronin], [publicProvider()])
@@ -14,7 +14,7 @@ if(!projectId) throw Error("Project ID missing")
 const config = createConfig({
   autoConnect:true,
   connectors: [ new RoninConnector({
-    chains:[ronin],
+    chains:[saigon],
     options:{
       projectId,
       metadata

@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react'
 import { useAccount, useConnect } from 'wagmi'
 import QRCode from "react-qr-code"
 
+type DataUriEvent = {
+  uri: string,
+  mobile: boolean
+}
+
 export default function Connect() {
   const { connector: activeConnector, isConnected, address } = useAccount()
   const { connect, connectors, error, isLoading, pendingConnector } = useConnect()
@@ -11,7 +16,12 @@ export default function Connect() {
   useEffect(()=>{
     connectors[0].on('message', (args)=>{
       if(args.type === 'display_uri'){
-        setUri(args.data as string)
+        const { mobile, uri } = args.data as DataUriEvent
+
+        // If user is on mobile device we don't need to generate the QRCode
+        if(mobile) return
+
+        setUri(uri)
       }
     })
 

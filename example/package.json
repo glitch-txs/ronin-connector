@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "up": "npm install ronin-connector@latest"
   },
   "dependencies": {
     "@types/node": "20.4.1",
@@ -18,7 +19,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-qr-code": "^2.0.11",
-    "ronin-connector": "^0.0.3",
+    "ronin-connector": "^0.0.5",
     "typescript": "5.1.6",
     "viem": "^1.2.13",
     "wagmi": "^1.3.8"
