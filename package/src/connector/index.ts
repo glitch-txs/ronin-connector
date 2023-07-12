@@ -3,7 +3,6 @@ import WalletConnectProvider from '@walletconnect/ethereum-provider'
 import { EthereumProviderOptions } from '@walletconnect/ethereum-provider/dist/types/EthereumProvider'
 import { normalizeNamespaces } from '@walletconnect/utils'
 import {
-  EIP1193Events,
   EIP1193Provider,
   ProviderRpcError,
   SwitchChainError,
