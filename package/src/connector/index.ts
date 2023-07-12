@@ -180,10 +180,6 @@ export class RoninConnector extends Connector<
   async getProvider({ chainId }: { chainId?: number } = {}) {
     
     if(window?.ronin){
-      if(window.ronin.provider.on!) return window.ronin.provider
-
-      window.ronin.provider.on = window.ronin.roninEvent.addEventListener as EIP1193Events['on']
-      window.ronin.provider.removeListener = window.ronin.roninEvent.removeEventListener as EIP1193Events['removeListener']
       this.#isExtension = true
       return window.ronin.provider
     }
@@ -381,7 +377,7 @@ export class RoninConnector extends Connector<
   protected onDisplayUri = (uri: string) => {
     this.emit('message', { type: 'display_uri', data: uri })
     if(mobile && uri)
-    window.open(`https://wallet.roninchain.com/auth-connect?uri=${uri}`, '_self', 'noreferrer noopener')
+    window.open(`https://wallet.roninchain.com/auth-connect?uri=${encodeURIComponent(uri)}`, '_self', 'noreferrer noopener')
   }
 
   protected onConnect = () => {
