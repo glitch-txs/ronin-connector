@@ -374,7 +374,7 @@ export class RoninConnector extends Connector<
   }
 
   protected onDisplayUri = (uri: string) => {
-    this.emit('message', { type: 'display_uri', data: uri })
+    this.emit('message', { type: 'display_uri', data: { uri, mobile } })
     if(mobile && uri)
     window.open(`https://wallet.roninchain.com/auth-connect?uri=${encodeURIComponent(uri)}`, '_self', 'noreferrer noopener')
   }
