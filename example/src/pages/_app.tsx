@@ -3,7 +3,8 @@ import type { AppProps } from 'next/app'
 import { createConfig, configureChains } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
 import { WagmiConfig } from 'wagmi'
-import { RoninConnector, ronin } from '@/ronin'
+import { RoninConnector, ronin } from 'ronin-connector'
+import { metadata } from '@/utils/metadata'
 
 const { publicClient } = configureChains([ronin], [publicProvider()])
  
@@ -14,8 +15,11 @@ const config = createConfig({
   autoConnect:true,
   connectors: [ new RoninConnector({
     chains:[ronin],
-    options:{ projectId }
-  }) ],
+    options:{
+      projectId,
+      metadata
+    }
+  })],
   publicClient,
 })
 

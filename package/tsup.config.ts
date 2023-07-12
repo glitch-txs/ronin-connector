@@ -5,7 +5,8 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   target: 'es2021',
   clean: true,
-  minify:true,
   bundle: true,
   dts: true,
+  platform:'browser',
+  external:['wagmi', 'viem', 'typescript']
 })
