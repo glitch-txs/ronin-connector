@@ -1,0 +1,40 @@
+{
+  "name": "ronin-connector",
+  "version": "0.0.0",
+  "description": "Ronin Wallet Connector for Wagmi",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "build": "tsup",
+    "upload":"npm run build && npm publish --public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glitch-txs/ronin-connector.git"
+  },
+  "keywords": [
+    "ronin",
+    "blockchain",
+    "wagmi",
+    "wallet"
+  ],
+  "author": "glitch-txs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/glitch-txs/ronin-connector/issues"
+  },
+  "homepage": "https://github.com/glitch-txs/ronin-connector#readme",
+  "peerDependencies": {
+    "viem": ">=1",
+    "wagmi": ">=1",
+    "typescript": ">=5"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "tsup": "^7.1.0"
+  }
+}
