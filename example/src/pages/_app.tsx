@@ -6,7 +6,7 @@ import { WagmiConfig } from 'wagmi'
 import { RoninConnector, ronin, saigon } from 'ronin-connector'
 import { metadata } from '@/utils/metadata'
 
-const { publicClient } = configureChains([ronin], [publicProvider()])
+const { publicClient } = configureChains([saigon], [publicProvider()])
  
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID as string
 if(!projectId) throw Error("Project ID missing")
