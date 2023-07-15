@@ -14,7 +14,7 @@ import {
 } from 'viem'
 import { Connector } from 'wagmi'
 import { WalletClient } from '../types'
-import { isMobile } from '../utils/isMobile'
+import { isAndroid, isMobile } from '../utils/isMobile'
 
 type RoninOptions = {
   /**
@@ -44,6 +44,7 @@ const NAMESPACE = 'eip155'
 const REQUESTED_CHAINS_KEY = 'requestedChains'
 const ADD_ETH_CHAIN_METHOD = 'wallet_addEthereumChain'
 const mobile = isMobile()
+const android = isAndroid()
 
 export class RoninConnector extends Connector<
   WalletConnectProvider | EIP1193Provider,
@@ -376,7 +377,11 @@ export class RoninConnector extends Connector<
   protected onDisplayUri = (uri: string) => {
     this.emit('message', { type: 'display_uri', data: { uri, mobile } })
     if(mobile && uri)
-    window.open(`https://wallet.roninchain.com/auth-connect?uri=${encodeURIComponent(uri)}`, '_self', 'noreferrer noopener')
+    window.open(
+      `https://wallet.roninchain.com/auth-connect?uri=${encodeURIComponent(uri)}`,
+      android ? '_blanck' : '_self',
+      'noreferrer noopener'
+    )
   }
 
   protected onConnect = () => {
