@@ -7,6 +7,11 @@ type DataUriEvent = {
   mobile: boolean
 }
 
+type Args = {
+  type: string;
+  data?: unknown;
+}
+
 export default function Connect() {
   const { connector: activeConnector, isConnected, address } = useAccount()
   const { connect, connectors, error, isLoading, pendingConnector } = useConnect()
@@ -14,7 +19,7 @@ export default function Connect() {
   const [uri, setUri] = useState<string>('')
 
   useEffect(()=>{
-    connectors[0].on('message', (args)=>{
+    const handleUri = (args: Args)=>{
       if(args.type === 'display_uri'){
         const { mobile, uri } = args.data as DataUriEvent
 
@@ -23,9 +28,12 @@ export default function Connect() {
 
         setUri(uri)
       }
-    })
+    }
+    connectors[0].on('message', handleUri)
 
-    return ()=>connectors[0].off('message', console.log) as any
+    return ()=>{
+      connectors[0].off('message', handleUri)
+    }
   },[])
  
   return (
