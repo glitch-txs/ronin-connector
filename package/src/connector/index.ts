@@ -74,9 +74,9 @@ export class RoninConnector extends Connector<
     try {
       const provider = await this.getProvider()
       if(this.#isExtension){
-        window.ronin?.roninEvent.addEventListener('accountsChanged', this.onAccountsChanged)
-        window.ronin?.roninEvent.addEventListener('chainChanged', this.onChainChanged)
-        window.ronin?.roninEvent.addEventListener('disconnect', this.onDisconnect)
+        (provider as EIP1193Provider).on('accountsChanged', this.onAccountsChanged);
+        (provider as EIP1193Provider).on('chainChanged', this.onChainChanged);
+        (provider as EIP1193Provider).on('disconnect', this.onDisconnect);
   
         this.emit('message', { type: 'connecting' })
   
@@ -132,9 +132,9 @@ export class RoninConnector extends Connector<
 
     try {
       if(this.#isExtension){
-        window.ronin?.roninEvent.removeEventListener('accountsChanged', this.onAccountsChanged)
-        window.ronin?.roninEvent.removeEventListener('chainChanged', this.onChainChanged)
-        window.ronin?.roninEvent.removeEventListener('disconnect', this.onDisconnect)
+        (provider as EIP1193Provider).removeListener('accountsChanged', this.onAccountsChanged);
+        (provider as EIP1193Provider).removeListener('chainChanged', this.onChainChanged);
+        (provider as EIP1193Provider).removeListener('disconnect', this.onDisconnect);
 
         this.emit('change', { account: undefined })
         this.emit('disconnect')
