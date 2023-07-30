@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useAccount, useConnect } from 'wagmi'
+import { useAccount, useConnect, useDisconnect, useNetwork } from 'wagmi'
 import QRCode from "react-qr-code"
 
 type DataUriEvent = {
@@ -14,10 +14,12 @@ type Args = {
 
 export default function Connect() {
   const { connector: activeConnector, isConnected, address } = useAccount()
+  const { chain } = useNetwork()
+  const { disconnect } = useDisconnect()
   const { connect, connectors, error, isLoading, pendingConnector } = useConnect()
   
   const [uri, setUri] = useState<string>('')
-
+  console.log(chain)
   useEffect(()=>{
     const handleUri = (args: Args)=>{
       if(args.type === 'display_uri'){
@@ -34,13 +36,14 @@ export default function Connect() {
     return ()=>{
       connectors[0].off('message', handleUri)
     }
-  },[])
+  },[connectors])
  
   return (
     <>
-      {isConnected && <div>Connected to {activeConnector?.name} as {address}</div>}
+      {isConnected && <div>Connected to {activeConnector?.name} as {address} <br/> chain: {chain?.name} </div>}
 
-      {connectors.map((connector) => (
+      {isConnected ? <button onClick={()=>disconnect()}>Disconnect</button> :
+      connectors.map((connector) => (
         <button
           disabled={!connector.ready}
           key={connector.id}
@@ -52,8 +55,6 @@ export default function Connect() {
             ' (connecting)'}
         </button>
       ))}
-
-      <button onClick={()=>connectors[0].disconnect()}>Disconnect</button>
  
       {error && <div>{error.message}</div>}
 

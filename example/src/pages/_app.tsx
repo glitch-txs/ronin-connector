@@ -14,7 +14,7 @@ if(!projectId) throw Error("Project ID missing")
 const config = createConfig({
   autoConnect:true,
   connectors: [ new RoninConnector({
-    chains:[saigon],
+    chains:[saigon, ronin],
     options:{
       projectId,
       metadata
