@@ -2,7 +2,7 @@ import { Chain } from "wagmi";
 
 export const ronin = {
   id: 2020,
-  name: 'Ronin mainnet',
+  name: 'Ronin',
   network: 'ronin',
   nativeCurrency: { name: 'RON', symbol: 'RON', decimals: 18 },
   rpcUrls: {
