@@ -357,10 +357,12 @@ export class RoninConnector extends Connector<
     return methods ?? []
   }
 
-  protected onAccountsChanged = async() => {
-    const address = await this.getAccount()
-    if (!address) this.emit('disconnect')
-    else this.emit('change', { account: address })
+  protected onAccountsChanged = (accounts: string[]) => {
+    if (accounts.length === 0 || accounts[0] === undefined) {
+      this.emit('disconnect')
+    } else {
+      this.emit('change', { account: getAddress(accounts[0] as string) })
+    }
   }
 
   protected onChainChanged = async() => {
