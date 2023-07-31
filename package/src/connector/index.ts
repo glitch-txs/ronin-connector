@@ -213,12 +213,9 @@ export class RoninConnector extends Connector<
         // If shim does not exist in storage, wallet is disconnected
         !this.storage?.getItem(this.shimDisconnectKey)
       )
-        return false
-      const [account] = await this.getAccount()
-      // If an account does not exist on the session, then the connector is unauthorized.
-      if (!account) return false
-
-      return true
+      return false
+      const account = await this.getAccount()
+      return !!account
     } catch {
       return false
     }
