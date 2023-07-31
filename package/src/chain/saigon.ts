@@ -22,4 +22,5 @@ export const saigon = {
       blockCreated: 18736871,
     },
   },
+  testnet: true,
 } as const satisfies Chain
