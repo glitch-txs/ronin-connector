@@ -1,6 +1,6 @@
 {
   "name": "ronin-connector",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Ronin Wallet Connector for Wagmi",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
