@@ -40,6 +40,10 @@ type RoninOptions = {
   shimDisconnect?: boolean
 }
 
+type RoninWalletProvider = {
+  disconnect: () => void
+} & EIP1193Provider
+
 const NAMESPACE = 'eip155'
 const REQUESTED_CHAINS_KEY = 'requestedChains'
 const ADD_ETH_CHAIN_METHOD = 'wallet_addEthereumChain'
@@ -142,6 +146,8 @@ export class RoninConnector extends Connector<
         // Remove shim signalling wallet is disconnected
         if (this.options.shimDisconnect)
         this.storage?.removeItem(this.shimDisconnectKey)
+
+        provider.disconnect()
         return
       }
 
@@ -181,7 +187,7 @@ export class RoninConnector extends Connector<
     
     if(window?.ronin){
       this.#isExtension = true
-      return window.ronin.provider
+      return window.ronin.provider as RoninWalletProvider
     }
 
     this.#isExtension = false
